@@ -30,10 +30,10 @@ class Scraping:
         Database = database.Database("data")
         Database.create_database()
         for i in self.data:
-            print(i, self.data[i])
             Database.insert_data(self.data[i])
         Database.commit_changes()
 
 
 Scraping = Scraping()
 Scraping.get_data()
+Scraping.insert_data()
