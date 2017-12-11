@@ -1,5 +1,6 @@
 import lxml.html
 import requests
+import database
 
 
 class Scraping:
@@ -24,8 +25,15 @@ class Scraping:
             for element in self.work_data:
                 element = element[0].replace('', '').strip()
                 self.data[self.etree.index(item)].append(element)
+
+    def insert_data(self):
+        Database = database.Database("data")
+        Database.create_database()
         for i in self.data:
             print(i, self.data[i])
+            Database.insert_data(self.data[i])
+        Database.commit_changes()
+
 
 Scraping = Scraping()
 Scraping.get_data()
